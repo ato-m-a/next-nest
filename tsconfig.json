@@ -3,10 +3,11 @@
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
-    "strict": true,
     "pretty": true,
     "noImplicitAny": true,
-    "alwaysStrict": true,
+    "strict": false,
+    "alwaysStrict": false,
+    "strictPropertyInitialization": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "outDir": ".next",
@@ -37,7 +38,8 @@
     "./pages/**/*",
     "./src/**/*",
     "./ui/**/*",
-    "types.ts"
+    "types.ts",
+    "env.d.ts"
   ],
   "exclude": [
     "node_modules"

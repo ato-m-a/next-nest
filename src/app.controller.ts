@@ -7,10 +7,4 @@ export class AppController {
   public index(@Query('name') name?: string) {
     return { name };
   }
-
-  @Render('about')
-  @Get('/about')
-  public about() {
-    return {};
-  }
 }
