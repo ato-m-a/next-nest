@@ -4,9 +4,7 @@ import { Module } from '@nestjs/common';
 import { AboutController } from './about/about.controller';
 
 @Module({
-  imports: [
-    AboutController
-  ],
-  controllers: []
+  imports: [],
+  controllers: [AboutController]
 })
 export class PageModule {}

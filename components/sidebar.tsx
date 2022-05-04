@@ -28,11 +28,6 @@ const Sidebar: FC = () => {
             <a>About</a>
           </Link>
         </li>
-        <li>
-          <Link href="/views/blog" as="/blog" prefetch={false}>
-            <a>Blog</a>
-          </Link>
-        </li>
       </ul>
     </div>
   );

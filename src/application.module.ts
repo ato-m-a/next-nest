@@ -9,10 +9,8 @@ import { AuthModule } from './auth/auth.module';
 
 /* Controller */
 import { AppController } from './app.controller';
-import { BlogController } from './blog/blog.controller';
 
 /* Service */
-import { BlogService } from './blog/blog.service';
 
 @Module({
   imports: [
@@ -26,7 +24,7 @@ import { BlogService } from './blog/blog.service';
     ApiModule,
     AuthModule
   ],
-  controllers: [AppController, BlogController],
-  providers: [BlogService],
+  controllers: [AppController],
+  providers: [],
 })
 export class AppModule {}
