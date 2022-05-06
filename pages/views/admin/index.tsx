@@ -6,7 +6,7 @@ interface Props {
   result: string | string[] | undefined;
 }
 
-const Auth: NextPage<Props> = ({ result }) => {
+const Admin: NextPage<Props> = ({ result }) => {
   const [text, setText] = useState({
     id: '',
     pw: ''
@@ -22,7 +22,7 @@ const Auth: NextPage<Props> = ({ result }) => {
   }
 
   const log = async () => {
-    const response = await axios.post('/auth/signin', { id, pw });
+    const response = await axios.post('api/auth/signin', { id, pw });
     console.log(response);
   }
 
@@ -45,4 +45,4 @@ export async function getServerSideProps(ctx: NextPageContext) {
 
   return { props };
 }
-export default Auth;
+export default Admin;

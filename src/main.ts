@@ -3,25 +3,35 @@ import { AppModule } from './application.module';
 import session from 'express-session';
 import * as dotenv from 'dotenv';
 import { urlencoded, json } from 'express';
+import { ValidationPipe } from '@nestjs/common';
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 async function bootstrap() {
   const server = await NestFactory.create(AppModule);
 
+  // session
   server.use(
     session({
       secret: process.env.SECRET_KEY,
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: 24*60*60,
+        maxAge: 86400000, // ms단위 (하루)
         secure: process.env.NODE_ENV === 'production',
-        httpOnly: true
+        httpOnly: process.env.NODE_ENV === 'production'
       }
     })
   );
 
+  // MariaDB
+  server.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true
+  }));
+
+  // bodyParser.urlencoded
   server.use(
     urlencoded({
       limit: '50mb',
@@ -30,13 +40,16 @@ async function bootstrap() {
     })
   );
 
+  // bodyParser.json
   server.use(
     json({
       limit: '50mb'
     })
   );
-
-  await server.listen(3000);
+  
+  // 3000 port, Ipv4 listener
+  await server.listen(3000, '0.0.0.0');
 }
 
+// app init
 bootstrap();

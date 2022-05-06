@@ -1,8 +1,8 @@
-import { IsString, IsObject, IsNumber, IsNotEmpty, ValidateNested } from 'class-validator';
+import { IsString, IsObject, IsNumber, IsNotEmpty, ValidateNested, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
 
 /* 로그인 DTO */
-export class SignInDto {
+export class InputDto {
   @IsNotEmpty()
   @IsString()
   readonly id: string;
@@ -13,7 +13,7 @@ export class SignInDto {
 }
 
 /* Auth Output DTO */
-export class SessionDto {
+export class OutputDto {
   @IsNotEmpty()
   @IsNumber()
   readonly status: number;

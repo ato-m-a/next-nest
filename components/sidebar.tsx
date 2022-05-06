@@ -28,6 +28,11 @@ const Sidebar: FC = () => {
             <a>About</a>
           </Link>
         </li>
+        <li>
+          <Link href="/admin" as="/admin">
+            <a>Admin</a>
+          </Link>
+        </li>
       </ul>
     </div>
   );

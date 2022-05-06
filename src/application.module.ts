@@ -1,16 +1,19 @@
 import { Module } from '@nestjs/common';
 import { RenderModule } from 'nest-next';
+import { RouterModule } from 'nest-router';
 import Next from 'next';
 
 /* Other Module */
-import { PageModule } from './page/page.module';
+import { ClientModule } from './client/client.module';
 import { ApiModule } from './api/api.module';
-import { AuthModule } from './auth/auth.module';
 
 /* Controller */
 import { AppController } from './app.controller';
 
 /* Service */
+
+/* Routes */
+import { routes } from './routes'; 
 
 @Module({
   imports: [
@@ -20,9 +23,11 @@ import { AppController } from './app.controller';
         conf: { useFilesystemPublicRoutes: false },
       }),
     ),
-    PageModule,
-    ApiModule,
-    AuthModule
+    RouterModule.forRoutes(routes),
+    // Client Page Rendering Module
+    ClientModule,
+    // Server API Module
+    ApiModule
   ],
   controllers: [AppController],
   providers: [],
