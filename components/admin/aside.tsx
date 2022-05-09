@@ -10,7 +10,6 @@ interface Props {
 const Aside: FC<Props> = ({ auth }) => {
   return (
     <div className={styles.admin__sidebar}>
-
     </div>
   )
 }
