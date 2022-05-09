@@ -1,0 +1,32 @@
+@import './variable.scss';
+
+@mixin font-face($style-name, $file) {
+  @font-face {
+    font-family: $style-name;
+    src: url($file) format('truetype');
+  }
+}
+
+@include font-face('DejaVuSansMono', '../assets/font/DejaVuSansMono.ttf');
+@include font-face('NanumGothic', '../assets/font/NanumGothic.ttf');
+@include font-face('NanumGothicCoding', '../assets/font/NanumGothicCoding.ttf');
+@include font-face('NotoSansKR', '../assets/font/NotoSansKR-Light.otf');
+
+::selection {
+  background: #252525;
+  color: white;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+html, body {
+  overflow-x: hidden;
+
+  #__next {
+    display: flex;
+    flex-direction: column;
+  }
+}

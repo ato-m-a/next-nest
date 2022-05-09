@@ -1,22 +1,23 @@
-import { IsString, IsObject, IsNumber, IsNotEmpty, ValidateNested, IsBoolean } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 
-/* 로그인 DTO */
-export class InputDto {
+/* 메뉴 작성 DTO */
+export class CreateDto {
   @IsNotEmpty()
   @IsString()
-  readonly id: string;
+  readonly name: string;
 
-  @IsNotEmpty()
-  @IsString()
-  pw: string;
-}
-
-/* Auth Output DTO */
-export class OutputDto {
   @IsNotEmpty()
   @IsNumber()
-  readonly status: number;
+  readonly no: number;
 
-  readonly data: object | boolean;
+  @IsNotEmpty()
+  @IsString({ each: true })
+  readonly page: string[];
+}
+
+/* 메뉴 삭제 DTO */
+export class DeleteDto {
+  @IsNotEmpty()
+  @IsString()
+  readonly name: string;
 }

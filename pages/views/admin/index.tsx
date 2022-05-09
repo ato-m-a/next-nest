@@ -1,42 +1,22 @@
-import { useState } from 'react';
-import { NextPage, NextPageContext } from 'next';
-import axios from 'axios';
+import { NextPageContext } from 'next';
+import { Page } from '../../../types/page';
+
+/* Layout */
+import AdminLayout from '../../../layouts/admin';
 
 interface Props {
   result: string | string[] | undefined;
 }
 
-const Admin: NextPage<Props> = ({ result }) => {
-  const [text, setText] = useState({
-    id: '',
-    pw: ''
-  });
-
-  const { id, pw } = text;
-
-  const onChange = (e: any) => {
-    setText({
-      ...text,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const log = async () => {
-    const response = await axios.post('api/auth/signin', { id, pw });
-    console.log(response);
-  }
-
+const Admin: Page<Props> = ({ result }) => {
   return (
     <div className="body">
       <div>{result}</div>
-      <div>
-        <input type="text" name="id" value={id} onChange={onChange} />
-        <input type="password" name="pw" value={pw} onChange={onChange} />
-        <button type="button" onClick={log}>제출</button>
-      </div>
     </div>
   );
 };
+
+Admin.layout = AdminLayout;
 
 export async function getServerSideProps(ctx: NextPageContext) {
   const props: Props = {

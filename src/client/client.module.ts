@@ -1,14 +1,25 @@
 /* 페이지 렌더링을 맡는 서버 모듈입니다 */
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 
 /* controller */
 
 /* module */
 import { AdminModule } from './admin/admin.module';
-import { AboutModule } from './about/about.module';
+
+/* Middleware */
+import { SessionMiddleware } from './client.middleware';
 
 @Module({
-  imports: [AdminModule, AboutModule],
+  imports: [AdminModule],
   controllers: []
 })
-export class ClientModule {}
+export class ClientModule {
+  configure(session: MiddlewareConsumer): any {
+    session
+      .apply(SessionMiddleware)
+      .exclude(
+        { path: '/admin/signin', method: RequestMethod.GET }
+      )
+      .forRoutes('/admin/*', '/admin')
+  }
+}

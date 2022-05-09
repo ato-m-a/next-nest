@@ -1,17 +1,22 @@
-import { FC } from 'react';
-import type { AppProps /*, AppContext */ } from 'next/app';
-import Sidebar from '../components/sidebar';
+import type { AppProps } from 'next/app';
+import { Fragment } from 'react';
+import type { Page } from '../types/page';
 
-const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+/* global style */
+import '../styles/global.scss';
+
+type Props = AppProps & {
+  Component: Page;
+}
+
+const MyApp = ({ Component, pageProps }: Props) => {
+  const getLayout = Component.getLayout ?? (page => page);
+  const Layout = Component.layout ?? Fragment;
+
   return (
-    <div style={{ display: 'flex', maxWidth: 1100 }}>
-      <div style={{ flexBasis: '30%', margin: 25 }}>
-        <Sidebar />
-      </div>
-      <div style={{ flexBasis: '70%', margin: 25 }}>
-        <Component {...pageProps} />
-      </div>
-    </div>
+    <Layout>
+      { getLayout(<Component {...pageProps} />) }
+    </Layout>
   );
 };
 

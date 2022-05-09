@@ -4,6 +4,7 @@ import { Routes } from 'nest-router';
 import { ApiModule } from './api/api.module';
 import { AuthModule } from './api/auth/auth.module';
 import { MenuModule } from './api/menu/menu.module';
+import { PageModule } from './api/page/page.module';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
       {
         path: '/menu',
         module: MenuModule
+      },
+      {
+        path: '/page',
+        module: PageModule
       }
     ]
   }
