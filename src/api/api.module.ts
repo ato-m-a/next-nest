@@ -27,7 +27,8 @@ export class ApiModule {
     session
       .apply(SessionMiddleware)
       .exclude(
-        { path: '/api/auth/signin', method: RequestMethod.POST }
+        { path: '/api/auth/signin', method: RequestMethod.POST },
+        { path: '/api/auth/signup', method: RequestMethod.POST }
       )
       .forRoutes('api/*')
   }

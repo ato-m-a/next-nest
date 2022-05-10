@@ -10,7 +10,7 @@ import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { AuthService } from './auth.service';
 
 /* DTO */
-import { SignInDto, AllowDto } from './auth.dto';
+import { SignInDto, SignUpDto, AllowDto } from './auth.dto';
 
 @Controller()
 export class AuthController {
@@ -48,6 +48,14 @@ export class AuthController {
     await session.save(() => {
       res.status(204).send();
     });
+  }
+
+  /* 관리자 계정 생성 */
+  @Post('/signup')
+  public async SignUp(@Req() req: Request, @Res() res: Response, @Session() session: Record<string, any>, @Body() dataset: SignUpDto) {
+    await this.AuthService.SignUp({ ID: dataset.id, PW: dataset.pw, ROLE: dataset.role, NAME: dataset.name, ALLOW: false });
+
+    res.status(201).json({ result: true });
   }
 
   /* 허용 IP 생성 */

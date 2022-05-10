@@ -18,7 +18,8 @@ export class ClientModule {
     session
       .apply(SessionMiddleware)
       .exclude(
-        { path: '/admin/signin', method: RequestMethod.GET }
+        { path: '/admin/signin', method: RequestMethod.GET },
+        { path: '/admin/signup', method: RequestMethod.GET }
       )
       .forRoutes('/admin/*', '/admin')
   }

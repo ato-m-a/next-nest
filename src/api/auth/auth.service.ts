@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 
 import { Injectable } from '@nestjs/common';
 
-import { SignInDto, SessionDto, AllowDto } from './auth.dto';
+import { SignInDto, SessionDto, AllowDto, CreateDto } from './auth.dto';
 import { Auth, Allow } from './auth.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -25,6 +25,7 @@ export class AuthService {
         .select([
           'auth.ID',
           'auth.ROLE',
+          'auth.NAME',
           'auth.ALLOW',
           'auth.REGDATE',
           'allow'
@@ -67,6 +68,17 @@ export class AuthService {
     } else {
       return { status: 404, data: false };
     }
+  }
+
+  /* 관리자 계정 생성 */
+  async SignUp(SignUpDto: CreateDto): Promise<void> {
+    SignUpDto.PW = crypto.createHmac(process.env.HASH, process.env.SECRET_KEY).update(SignUpDto.PW).digest('hex');
+
+    await this.AuthRepository.createQueryBuilder()
+      .insert()
+      .into(Auth)
+      .values(SignUpDto)
+      .execute();
   }
 
   /* 새 허용 IP 작성 */

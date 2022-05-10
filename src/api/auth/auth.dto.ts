@@ -21,18 +21,43 @@ export class SessionDto {
   readonly data: object | boolean;
 }
 
-/* user create DTO */
+/* user create DTO (to controller) */
+export class SignUpDto {
+  @IsNotEmpty()
+  @IsString() 
+  readonly id: string;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly pw: string;
+
+  @IsString()
+  readonly name?: string;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly role: string;
+}
+
+/* user create DTO (to service) */
 export class CreateDto {
   @IsNotEmpty()
   @IsString()
-  id: string;
+  ID: string;
 
   @IsNotEmpty()
   @IsString()
-  pw: string;
+  PW: string;
+
+  @IsNotEmpty()
+  @IsString()
+  ROLE: string;
 
   @IsString()
-  name: string;
+  NAME: string;
+
+  @IsBoolean()
+  ALLOW: boolean;
 }
 
 /* allow create DTO */
