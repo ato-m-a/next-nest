@@ -29,7 +29,13 @@ const Aside: FC = () => {
         <ul>
           <li>
             <span>관리자</span>
-            <strong>{data?.ROLE === 'SUPER' ? '최고관리자' : '사이트관리자'}</strong>
+            <strong>
+              {
+                data?.ROLE === 'SUPER' ? '최고관리자'
+                : data?.ROLE === 'SITE' ? '사이트관리자'
+                : '게스트'
+              }
+            </strong>
           </li>
           <li>
             <span>아이디</span>
@@ -37,7 +43,13 @@ const Aside: FC = () => {
           </li>
           <li>
             <span>레벨</span>
-            <strong>{data?.ROLE === 'SUPER' ? '마스터' : '사이트관리자'}</strong>
+            <strong>
+              {
+                data?.ROLE === 'SUPER' ? '마스터'
+                : data?.ROLE === 'SITE' ? '사이트관리자'
+                : '게스트'
+              }
+            </strong>
           </li>
         </ul>
       </div>
