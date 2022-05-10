@@ -7,7 +7,7 @@ type ClientPageProps = {
 const ClientLayout = ({ children }: ClientPageProps): ReactElement => {
   return (
     <>
-      { children }
+      {children}
     </>
   )
 }

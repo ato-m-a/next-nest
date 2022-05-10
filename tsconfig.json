@@ -23,6 +23,9 @@
       "dom"
     ],
     "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["./styles/*"]
+    },
     "typeRoots": [
       "node_modules/@types",
       "./typings"

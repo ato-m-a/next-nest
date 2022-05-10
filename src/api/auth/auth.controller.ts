@@ -1,6 +1,10 @@
-import { Controller, Post, Get, Delete, Req, Res, Body, Session } from '@nestjs/common';
+import { Controller, Post, Get, Delete, Req, Res, Body, Session, Inject } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { getClientIp } from 'request-ip';
+
+/* logger */
+import { Logger as WinstonLogger } from 'winston';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 /* Service */
 import { AuthService } from './auth.service';
@@ -10,11 +14,14 @@ import { SignInDto, AllowDto } from './auth.dto';
 
 @Controller()
 export class AuthController {
-  constructor (private AuthService: AuthService) {}
+  constructor (
+    private AuthService: AuthService,
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: WinstonLogger
+  ) {}
 
-  /* test */
-  @Get()
-  public async fetch(@Res() res: Response, @Session() session: Record<string, any>) {
+  /* 내 정보 fetch */
+  @Get('/myinfo')
+  public async fetchMyInfo(@Res() res: Response, @Session() session: Record<string, any>) {
     const response = await this.AuthService.Fetch(session);
     
     res.status(200).json(response);
@@ -30,6 +37,7 @@ export class AuthController {
       session.save();
     } 
 
+    this.logger.info('signed in successfully.', { ID: session.auth.ID, IP: getClientIp(req) });
     res.status(response.status).json(response.data);
   }
 
@@ -37,7 +45,9 @@ export class AuthController {
   @Delete('/signout')
   public async SignOut(@Res() res: Response, @Session() session: Record<string, any>) {
     delete session.auth;
-    res.status(204);
+    await session.save(() => {
+      res.status(204).send();
+    });
   }
 
   /* 허용 IP 생성 */

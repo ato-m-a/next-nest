@@ -10,12 +10,13 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 async function bootstrap() {
   const server = await NestFactory.create(AppModule);
 
-  // session
+  /* Session */
   server.use(
     session({
       secret: process.env.SECRET_KEY,
       resave: false,
       saveUninitialized: false,
+      rolling: true,
       cookie: {
         maxAge: 86400000, // ms단위 (하루)
         secure: process.env.NODE_ENV === 'production',
@@ -23,8 +24,8 @@ async function bootstrap() {
       }
     })
   );
-
-  // MariaDB
+  
+  /* Global Validation Pipe */
   server.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     forbidNonWhitelisted: true,

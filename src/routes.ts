@@ -6,6 +6,7 @@ import { AuthModule } from './api/auth/auth.module';
 import { MenuModule } from './api/menu/menu.module';
 import { PageModule } from './api/page/page.module';
 
+/* api route prefix */
 export const routes: Routes = [
   {
     path: '/api',

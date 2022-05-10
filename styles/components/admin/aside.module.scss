@@ -1,6 +1,8 @@
+@import '../../variable.scss';
+
 .admin__sidebar {
   position: fixed;
-  width: 240px;
+  width: $aside-width;
   height: 100%;
   background: #fff;
   overflow: hidden;
@@ -9,6 +11,96 @@
 
   .admin__logo {
     color: #333;
+    text-decoration: none;
+    height: 85px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0 27px 0;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
 
+  .admin__info {
+    position: relative;
+    cursor: default;
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dedede;
+    margin: 0 15px;
+
+    .admin__img {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background: #eff0f3;
+      border: 1px solid #e4e4e4;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        line-height: 22px;
+        white-space: nowrap;
+        text-align: -webkit-match-parent;
+
+        span {
+          display: inline-block;
+          width: 43px;
+          color: #999;
+        }
+
+        strong {
+          display: inline-block;
+          color: #333;
+          font-weight: bold;
+        }
+      }
+    }
+
+    ul::after {
+      content: "";
+      clear: both;
+      display: block;
+    }
+  }
+
+  .admin__title {
+    cursor: default;
+    color: #275cab;
+    font-size: 14px;
+    white-space: nowrap;
+    padding: 20px 15px 20px 15px;
+  }
+
+  .admin__menus {
+    ul {
+      list-style: none;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      // nuxt-link-active li background #F6F8FB
+
+      li {
+        cursor: pointer;
+        color: #275cab;
+        flex: 1;
+        position: relative;
+        display: list-item;
+        text-align: -webkit-match-parent;
+        padding: 15px;
+      }
+
+      li:hover {
+        background: #f6f8fb;
+      }
+    }
   }
 }
