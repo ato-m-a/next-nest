@@ -6,14 +6,17 @@ import { getClientIp } from 'request-ip';
 
 /* DTO */
 
-@Controller('admin')
+@Controller()
 export class AdminController {
-  /* 세션 테스트용 */
-  @Render('admin')
   @Get()
-  public AdminIndex(@Session() session: Record<string, any>) {
-    const result: string = session.auth ? session.auth.ID : 'Guest';
-    return { result };
+  public AdminIndex(@Session() session: Record<string, any>, @Res() res: Response) {
+    // 세션 있으면 메인 메뉴로 보냄
+    if (session && session.auth) {
+      return res.redirect('/admin/category');
+    // 세션 없으면 로그인 페이지로 리디렉트
+    } else {
+      return res.redirect('/admin/signin')
+    }
   }
 
   /* 로그인 페이지 */

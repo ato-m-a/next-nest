@@ -34,18 +34,22 @@ export class AuthController {
 
     if (response.status === 201) {
       session.auth = response.data;
-      session.save();
-    } 
-
-    this.logger.info('signed in successfully.', { ID: session.auth.ID, IP: getClientIp(req) });
+      session.save(() => { 
+        this.logger.info(
+          `[USER(${session.auth.ROLE})]${session.auth.ID}: signed in successfully. (${getClientIp(req)})`, 
+          { ID: session.auth.ID, IP: getClientIp(req) });
+      });
+    }
     res.status(response.status).json(response.data);
   }
 
   /* 로그아웃 */
   @Delete('/signout')
-  public async SignOut(@Res() res: Response, @Session() session: Record<string, any>) {
+  public async SignOut(@Req() req: Request, @Res() res: Response, @Session() session: Record<string, any>) {
+    const auth = session.auth;
     delete session.auth;
     await session.save(() => {
+      this.logger.info(`[USER(${auth.ROLE})]${auth.ID}: signed out successfully. (${getClientIp(req)})`);
       res.status(204).send();
     });
   }

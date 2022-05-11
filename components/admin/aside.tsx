@@ -29,7 +29,7 @@ const Aside: FC = () => {
         <ul>
           <li>
             <span>관리자</span>
-            <strong>{data?.NAME ? data?.NAME : '관리자'}</strong>
+            <strong>{data?.NAME || '관리자'}</strong>
           </li>
           <li>
             <span>아이디</span>
@@ -39,8 +39,8 @@ const Aside: FC = () => {
             <span>레벨</span>
             <strong>
               {
-                data?.ROLE === 'SUPER' ? '마스터'
-                : data?.ROLE === 'SITE' ? '사이트관리자'
+                data?.ROLE
+                ? data?.ROLE === 'SUPER' ? '마스터' : '사이트관리자'
                 : '게스트'
               }
             </strong>

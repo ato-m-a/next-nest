@@ -14,6 +14,13 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 export class PageService {
   constructor(@InjectRepository(Page) private PageRepository: Repository<Page>) {}
 
+  /* 페이지 query */
+  async queryPage() {
+    const response = await this.PageRepository.createQueryBuilder('page')
+        .getMany();
+    return response;
+  }
+
   /* 페이지 생성 */
   async createPage(CreateDto: CreateDto) {
 

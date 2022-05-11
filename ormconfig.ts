@@ -1,11 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 
-/* entities */
-import { Auth } from './src/api/auth/auth.entity';
-import { Menu } from './src/api/menu/menu.entity';
-import { Page } from './src/api/page/page.entity';
-
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const ormconfig: TypeOrmModuleOptions = {
@@ -20,7 +15,7 @@ const ormconfig: TypeOrmModuleOptions = {
     ? "src/api/**/*.entity.ts"
     : __dirname + '/**/*.entity.{js, ts}'
   ],
-  synchronize: true
+  synchronize: process.env.NODE_ENV !== 'production'
 }
 
 export default ormconfig;

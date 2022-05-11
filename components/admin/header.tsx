@@ -60,14 +60,22 @@ const Header: FC = () => {
             </Link>
           </li>
           <li>
-            <div className={styles.admin__path_btn}>
+            &nbsp;/&nbsp;
+            <Link
+              href={{ pathname: '/views/admin' }}
+              as='/admin'
+            >
               뭐시기
-            </div>
+            </Link>
           </li>
           <li>
-            <div className={styles.admin__path_btn}>
+            &nbsp;/&nbsp;
+            <Link
+              href={{ pathname: '/views/admin' }}
+              as='/admin'
+            >
               저시기
-            </div>
+            </Link>
           </li>
         </ol>
         <h3>

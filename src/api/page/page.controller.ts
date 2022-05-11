@@ -12,6 +12,14 @@ import { CreateDto, DeleteDto } from './page.dto';
 export class PageController {
   constructor (private PageService: PageService) {} 
 
+  /* 페이지 Getter */
+  @Get('/query')
+  public async queryPage(@Res() res: Response) {
+    const response = await this.PageService.queryPage();
+
+    res.status(200).json(response);
+  }
+
   /* 페이지 생성 */
   @Post('/create')
   public async createPage(@Req() req: Request, @Res() res: Response, @Body() CreateDto: CreateDto, @Session() session: Record<string, any>) {

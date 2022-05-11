@@ -12,6 +12,14 @@ import { CreateDto, DeleteDto } from './menu.dto';
 export class MenuController {
   constructor (private MenuService: MenuService) {} 
 
+  /* 메뉴 Getter */
+  @Get('/query')
+  public async queryMenu(@Res() res: Response) {
+    const response = await this.MenuService.queryMenu();
+
+    res.status(200).json(response);
+  }
+
   /* 메뉴 생성 */
   @Post('/create')
   public async createMenu(@Req() req: Request, @Res() res: Response, @Body() CreateDto: CreateDto, @Session() session: Record<string, any>) {

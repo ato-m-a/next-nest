@@ -14,6 +14,13 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 export class MenuService {
   constructor(@InjectRepository(Menu) private MenuRepository: Repository<Menu>) {}
 
+  /* 메뉴 query */
+  async queryMenu() {
+    const response = await this.MenuRepository.createQueryBuilder('menu')
+        .getMany();
+    return response;
+  }
+
   /* 메뉴 생성 */
   async createMenu(CreateDto: CreateDto) {
 
