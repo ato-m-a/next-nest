@@ -23,6 +23,13 @@ declare namespace NodeJS {
     DIGEST: string;
     SECRET_KEY: string;
 
+    /* Maria DB */
+    DB_HOST: string;
+    DB_PORT: number;
+    DB_USERNAME: string;
+    DB_PASSWORD: string;
+    DB_DATABASE: string;
+
     /* S3 */
     BUCKET_NAME: string;
   }

@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryColumn, ManyToOne } from 'typeorm';
 import { Menu } from '../menu/menu.entity';
 
-@Entity()
+@Entity({ name: 'page', schema: 'public' })
 export class Page {
   @PrimaryColumn({ type: 'varchar', length: 55, unique: true, nullable: false })
   NAME: string;

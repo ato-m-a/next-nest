@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, Generated, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'auth', schema: 'public' })
 export class Auth {
   @Generated()
   SEQ: number;
@@ -28,7 +28,7 @@ export class Auth {
 }
 
 /* 허용 IP entity */
-@Entity()
+@Entity({ name: 'allow', schema: 'public' })
 export class Allow {
   @PrimaryColumn({ type: 'varchar', length: 36, nullable: false })
   IP: string;

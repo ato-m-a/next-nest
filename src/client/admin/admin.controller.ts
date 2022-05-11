@@ -19,25 +19,25 @@ export class AdminController {
   /* 로그인 페이지 */
   @Render('admin/signin')
   @Get('/signin')
-  public SignIn(@Next() next: () => void) {
-    next();
+  public SignIn() {
+    return {};
   }
 
   /* 계정 생성 페이지 */
   @Render('admin/signup')
   @Get('/signup')
-  public SignUp(@Session() session: Record<string, any>, @Req() req: Request, @Res() res: Response, @Next() next: () => void) {
+  public SignUp(@Session() session: Record<string, any>, @Req() req: Request, @Res() res: Response) {
     /* 프로덕션 환경 */
     if (process.env.NODE_ENV === 'production') {
       // 슈퍼 유저 IP면
       if (getClientIp(req) === process.env.SUPER_USER) {
-        next();
+        return {};
       } else {
-        res.redirect('/admin');
+        return res.redirect('/admin');
       }
     /* 개발 환경 */
     } else {
-      next();
+      return {};
     }
   }
 }

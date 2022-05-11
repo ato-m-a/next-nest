@@ -13,9 +13,12 @@ import { MenuModule } from './menu/menu.module';
 /* Middleware */
 import { SessionMiddleware } from './api.middleware';
 
+/* orm config */
+import ormconfig from '../../ormconfig';
+
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot(ormconfig),
     AuthModule, 
     MenuModule
   ],
