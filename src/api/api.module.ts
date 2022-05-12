@@ -3,8 +3,8 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 
-/* API main controller */
 import { ApiController } from './api.controller';
+import { ApiService } from './api.service';
 
 /* routes modules */
 import { AuthModule } from './auth/auth.module';
@@ -17,14 +17,22 @@ import { SessionMiddleware } from './api.middleware';
 /* orm config */
 import ormconfig from '../../ormconfig';
 
+/* entities */
+import { Menu } from './menu/menu.entity';
+import { Page } from './page/page.entity';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot(ormconfig),
     AuthModule, 
     MenuModule,
-    PageModule
+    PageModule,
+    TypeOrmModule.forFeature([Menu]),
+    TypeOrmModule.forFeature([Page])
   ],
-  controllers: [ApiController]
+  controllers: [ApiController],
+  providers: [ApiService],
+  exports: [ApiService]
 })
 export class ApiModule {
   constructor(private connection: Connection) {}
@@ -34,8 +42,7 @@ export class ApiModule {
       .exclude(
         { path: '/api/auth/signin', method: RequestMethod.POST },
         { path: '/api/auth/signup', method: RequestMethod.POST },
-        { path: '/api/menu/query', method: RequestMethod.GET },
-        { path: '/api/page/query', method: RequestMethod.GET }
+        { path: '/api/query', method: RequestMethod.GET }
       )
       .forRoutes('api/*')
   }
