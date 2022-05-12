@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useQuery, UseQueryResult } from 'react-query';
 import { IAuth } from '../../interfaces/IAuth';
@@ -9,13 +9,15 @@ import { IAuth } from '../../interfaces/IAuth';
 import styles from '../../styles/components/admin/aside.module.scss';
 
 const Aside: FC = () => {
+  const router = useRouter();
+
   const { data, status, error, isLoading }: UseQueryResult<IAuth, Error> = useQuery('auth', async () => {
-    const res = await axios.get('/api/auth/myinfo');
-    return res.data;
-  },{
+    const { data } = await axios.get('/api/auth');
+    return data;
+  }, {
     onError: (error) => {
       alert('세션이 만료되어 로그인 페이지로 이동합니다.');
-      Router.replace('/admin/signin');
+      router.replace('/admin/signin');
     }
   });
   

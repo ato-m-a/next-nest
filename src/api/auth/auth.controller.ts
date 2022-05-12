@@ -20,7 +20,7 @@ export class AuthController {
   ) {}
 
   /* 내 정보 fetch */
-  @Get('/myinfo')
+  @Get()
   public async fetchMyInfo(@Res() res: Response, @Session() session: Record<string, any>) {
     const response = await this.AuthService.Fetch(session);
     

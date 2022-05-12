@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { Page } from '../../../types/page';
 
 /* style */
 import styles from '../../../styles/pages/admin/signin.module.scss';
 
 const SignUp: Page = () => {
+  const router = useRouter();
+
   const [text, setText] = useState({
     id: '',
     pw: '',
@@ -22,7 +24,7 @@ const SignUp: Page = () => {
   }, {
     onSuccess: (data, variables, context) => {
       alert(`계정을 성공적으로 생성했습니다: ${id}`);
-      Router.replace('/admin');
+      router.replace('/admin');
     },
     onError: (error: any, variables, context) => {
       alert(error.response.data);
@@ -92,7 +94,7 @@ const SignUp: Page = () => {
           display: inline-block;
           border: 1px solid #CDCBCB;
           color: #333;
-          padding-left: 15px;
+          padding: 0 15px;
           height: 48px;
         }
 

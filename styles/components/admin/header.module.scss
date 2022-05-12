@@ -76,7 +76,7 @@
         }
 
         .admin__header_btn:hover {
-          background: #2e9dd8;
+          background: #2e9dd8 !important;
         }
 
         /* nuxt-link-active background #2e9dd8 */
@@ -100,6 +100,10 @@
       list-style: none;
       font-size: 11px;
       color: #a8a8a8;
+
+      .admin__header_separator {
+        margin: 0px 3px;
+      }
 
       li {
         position: relative;

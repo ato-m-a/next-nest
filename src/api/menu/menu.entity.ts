@@ -9,9 +9,6 @@ export class Menu {
   @Column({ type: 'int', nullable: false })
   NO: number;
 
-  @Column({ type: 'varchar', length: 55, unique: true, nullable: false })
-  PATH: string;
-
   @OneToMany(type => Page, page => page.menu)
   PAGE: Page[];
 }

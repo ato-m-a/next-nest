@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { Page } from '../../../types/page';
 
 /* style */
 import styles from '../../../styles/pages/admin/signin.module.scss';
 
 const SignIn: Page = () => {
+  const router = useRouter();
+
   const [text, setText] = useState({
     id: '',
     pw: ''
@@ -31,7 +33,7 @@ const SignIn: Page = () => {
     return await axios.post('/api/auth/signin', { id, pw });
   }, {
     onSuccess: (data, variables, context) => {
-      Router.replace('/admin');
+      if (data) router.replace('/admin');
     },
     onError: (error: any, variables, context) => {
       switch (error.response.status) {
@@ -68,7 +70,7 @@ const SignIn: Page = () => {
               관리자 로그인
             </h1>
             <label htmlFor="id">아이디</label>
-            <input type="text" name="id" id="id" value={id} onChange={onChange} />
+            <input type="text" name="id" id="id" value={id} onChange={onChange} onKeyDown={(e) => e.key === 'Enter' && mutate()} />
 
             <label htmlFor="pw">비밀번호</label>
             <input type="password"name="pw" id="pw" value={pw} onChange={onChange} onKeyDown={(e) => e.key === 'Enter' && mutate()} />
@@ -83,9 +85,5 @@ const SignIn: Page = () => {
     </div>
   );
 };
-
-// export async function getServerSideProps(ctx: NextPageContext) {
-//   return {};
-// }
 
 export default SignIn;

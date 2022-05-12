@@ -9,11 +9,14 @@ export class Page {
   @Column({ type: 'boolean', nullable: false })
   ACTIVATE: boolean;
 
-  @Column({ type: 'int', nullable: false })
-  NO: number;
-
   @Column({ type: 'varchar', length: 55, unique: true, nullable: false })
   PATH: string;
+
+  @Column({ type: 'varchar', length: 24, nullable: false, default: '이미지' })
+  TYPE: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  CONTENT: string;
 
   @ManyToOne(type => Menu, menu => menu.PAGE, { onDelete: 'CASCADE' })
   menu: Menu;

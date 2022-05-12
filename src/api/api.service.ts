@@ -19,9 +19,10 @@ export class ApiService {
   
   /* userData fetch */
   async query() {
-    const menu = await this.MenuRepository.createQueryBuilder('menu').getMany();
-    const page = await this.PageRepository.createQueryBuilder('page').getMany();
+    const response = await this.MenuRepository.createQueryBuilder('menu')
+        .leftJoinAndSelect('menu.PAGE', 'page')
+        .getMany();
 
-    return { menu, page };
+    return { menu: response };
   }
 }
