@@ -22,9 +22,16 @@ export class ApiController {
     res.status(200).send(`Hello ${user}! ${message}`);
   }
 
-  @Get('/query')
-  async UserData(@Res() res: Response) {
-    const response = await this.ApiService.query();
+  @Get('/category')
+  async Category(@Res() res: Response) {
+    const response = await this.ApiService.Category();
+
+    res.status(200).json(response);
+  }
+
+  @Get('/common')
+  async Common(@Res() res: Response) {
+    const response = await this.ApiService.Common();
 
     res.status(200).json(response);
   }

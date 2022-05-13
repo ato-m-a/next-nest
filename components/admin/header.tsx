@@ -12,7 +12,7 @@ const Header: FC = () => {
 
   /* 상단 메뉴 */
   const navRoutes = [
-    { name: '홈', path: '/admin/home' },
+    { name: '공통', path: '/admin/common' },
     { name: '카테고리', path: '/admin/category' },
     { name: '팝업', path: '/admin/popup' },
     { name: '고객관리', path: '/admin/client' },

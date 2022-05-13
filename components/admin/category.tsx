@@ -1,6 +1,5 @@
-import { FC,  ReactElement } from 'react';
+import { FC,  ReactElement, Fragment } from 'react';
 import Link from 'next/link';
-import { Fragment } from 'react';
 import { IMenu } from '../../interfaces/ICategory';
 
 /* Component Props */

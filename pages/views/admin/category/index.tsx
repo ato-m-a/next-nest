@@ -1,6 +1,6 @@
-import { IData } from '../../../../interfaces/IData';
+import { ICategory } from '../../../../interfaces/IData';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
-import { fetchData } from '../../../../lib/api/data';
+import { CategoryData } from '../../../../modules/api';
 import { Page } from '../../../../types/page';
 
 /* components */
@@ -11,10 +11,9 @@ import AdminLayout from '../../../../layouts/admin';
 
 /* style */
 import styles from '../../../../styles/pages/admin/vertical.module.scss';
-import '../../../../styles/pages/admin/vertical.module.scss';
 
 const AdminCategory: Page = () => {
-  const { data, error } = useQuery<IData, Error>('userdata', fetchData);
+  const { data, error } = useQuery<ICategory, Error>('category', CategoryData);
   
   return (
     <div className={styles.admin__container}>
@@ -29,7 +28,7 @@ AdminCategory.layout = AdminLayout;
 export async function getServerSideProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery('userdata', () => fetchData());
+  await queryClient.prefetchQuery('category', () => CategoryData());
 
   return {
     props: {

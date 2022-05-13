@@ -5,10 +5,12 @@ import { ApiModule } from './api/api.module';
 import { AuthModule } from './api/auth/auth.module';
 import { MenuModule } from './api/menu/menu.module';
 import { PageModule } from './api/page/page.module';
+import { CommonModule } from './api/common/common.module';
 
 import { ClientModule } from './client/client.module';
 import { AdminModule } from './client/admin/admin.module'
 import { CategoryModule } from './client/admin/category/category.module';
+import { CommonModule as ClientCommon } from './client/admin/common/common.module';
 
 /* api route prefix */
 export const routes: Routes = [
@@ -28,6 +30,10 @@ export const routes: Routes = [
       {
         path: '/page',
         module: PageModule
+      },
+      {
+        path: '/common',
+        module: CommonModule
       }
     ]
   },
@@ -46,9 +52,13 @@ export const routes: Routes = [
             children: [
 
             ]
+          },
+          {
+            path: '/common',
+            module: ClientCommon
           }
         ]
-      }
+      },
     ]
   }
 ]
