@@ -77,6 +77,11 @@ const CommonFooter: FC<Props> = ({ propsData, emit }) => {
                 <input type="text" value={border.color} name="border.color" onChange={onChange} />
               </td>
             </tr>
+            {/* PC 텍스트 */}
+            <tr>
+              <td>PC 텍스트</td>
+            </tr>
+            {/* 모바일 텍스트 */}
           </tbody>
         </table>
       </div>
